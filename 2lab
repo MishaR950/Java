@@ -1,0 +1,127 @@
+
+        import java.util.ArrayList;
+        import java.util.List;
+        import java.util.function.Predicate;
+
+        public class Main {
+            public static void main(String[] args) {
+                // Создаем список городов
+                List<City> cities = new ArrayList<>();
+                cities.add(new City("Москва", "Столица", 12615279));
+                cities.add(new City("Санкт-Петербург", "Город федерального значения", 5383890));
+                cities.add(new City("Екатеринбург", "Город", 1493749));
+
+                // Создаем список парков
+                List<Park> parks = new ArrayList<>();
+                parks.add(new Park("Парк Горького", "Городской", 100, true, 1928));
+                parks.add(new Park("Летний сад", "Исторический", 12, true, 1704));
+                parks.add(new Park("Центральный парк", "Городской", 30, false, 1950));
+
+                // Фильтрация городов по населению (например, города с населением более 5 млн)
+                System.out.println("Города с населением более 5 млн:");
+                filterCities(cities, city -> city.getPopulation() > 5000000).forEach(System.out::println);
+
+                // Поиск парков с водоемом
+                System.out.println("\nПарки с водоемом:");
+                filterParks(parks, park -> park.hasWaterBody()).forEach(System.out::println);
+
+                // Парки, площадь которых больше 50 гектар
+                System.out.println("\nПарки площадью больше 50 гектар:");
+                filterParks(parks, park -> park.getArea() > 50).forEach(System.out::println);
+            }
+
+            // Метод для фильтрации городов
+            public static List<City> filterCities(List<City> cities, Predicate<City> predicate) {
+                List<City> result = new ArrayList<>();
+                for (City city : cities) {
+                    if (predicate.test(city)) {
+                        result.add(city);
+                    }
+                }
+                return result;
+            }
+
+            // Метод для фильтрации парков
+            public static List<Park> filterParks(List<Park> parks, Predicate<Park> predicate) {
+                List<Park> result = new ArrayList<>();
+                for (Park park : parks) {
+                    if (predicate.test(park)) {
+                        result.add(park);
+                    }
+                }
+                return result;
+            }
+        }
+
+// Класс для города
+        class City {
+            private String name;
+            private String status;
+            private int population;
+
+            public City(String name, String status, int population) {
+                this.name = name;
+                this.status = status;
+                this.population = population;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public String getStatus() {
+                return status;
+            }
+
+            public int getPopulation() {
+                return population;
+            }
+
+            @Override
+            public String toString() {
+                return name + " (" + status + ") - Население: " + population;
+            }
+        }
+
+// Класс для парка
+        class Park {
+            private String name;
+            private String type;
+            private int area;  // Площадь в гектарах
+            private boolean hasWaterBody;
+            private int yearOfCreation;
+
+            public Park(String name, String type, int area, boolean hasWaterBody, int yearOfCreation) {
+                this.name = name;
+                this.type = type;
+                this.area = area;
+                this.hasWaterBody = hasWaterBody;
+                this.yearOfCreation = yearOfCreation;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public String getType() {
+                return type;
+            }
+
+            public int getArea() {
+                return area;
+            }
+
+            public boolean hasWaterBody() {
+                return hasWaterBody;
+            }
+
+            public int getYearOfCreation() {
+                return yearOfCreation;
+            }
+
+            @Override
+            public String toString() {
+                return name + " (" + type + ") - Площадь: " + area + " га, Водоем: " + (hasWaterBody ? "Есть" : "Нет") + ", Год постройки: " + yearOfCreation;
+            }
+        }
+
