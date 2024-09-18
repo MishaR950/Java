@@ -1,0 +1,94 @@
+public class Main {
+    public static void main(String[] args) {
+        // Создание экземпляров городов
+        City city1 = new City("Москва", "Столица", 12500000);
+        City city2 = new City("Санкт-Петербург", "Город федерального значения", 5380000);
+
+        // Анонимные классы для вывода информации о городах
+        Info cityInfo1 = new Info() {
+            @Override
+            public void printDetails() {
+                System.out.println("Город: " + city1.name);
+                System.out.println("Статус: " + city1.status);
+                System.out.println("Население: " + city1.population);
+            }
+        };
+
+        Info cityInfo2 = new Info() {
+            @Override
+            public void printDetails() {
+                System.out.println("Город: " + city2.name);
+                System.out.println("Статус: " + city2.status);
+                System.out.println("Население: " + city2.population);
+            }
+        };
+
+        // Создание экземпляров парков
+        Park park1 = new Park("Центральный парк", "Городской", 15.5, true, "1920");
+        Park park2 = new Park("Сквер Победы", "Памятный", 5.0, false, "1985");
+
+        // Анонимные классы для вывода информации о парках
+        Info parkInfo1 = new Info() {
+            @Override
+            public void printDetails() {
+                System.out.println("Парк: " + park1.name);
+                System.out.println("Тип: " + park1.type);
+                System.out.println("Площадь: " + park1.area + " кв. км");
+                System.out.println("Наличие водоема: " + (park1.hasWaterBody ? "Да" : "Нет"));
+                System.out.println("Дата постройки: " + park1.buildDate);
+            }
+        };
+
+        Info parkInfo2 = new Info() {
+            @Override
+            public void printDetails() {
+                System.out.println("Парк: " + park2.name);
+                System.out.println("Тип: " + park2.type);
+                System.out.println("Площадь: " + park2.area + " кв. км");
+                System.out.println("Наличие водоема: " + (park2.hasWaterBody ? "Да" : "Нет"));
+                System.out.println("Дата постройки: " + park2.buildDate);
+            }
+        };
+
+        // Вывод информации о городах и парках
+        cityInfo1.printDetails();
+        cityInfo2.printDetails();
+        parkInfo1.printDetails();
+        parkInfo2.printDetails();
+    }
+}
+
+// Интерфейс для вывода информации
+interface Info {
+    void printDetails();
+}
+
+// Класс для представления города
+class City {
+    String name;
+    String status;
+    int population;
+
+    public City(String name, String status, int population) {
+        this.name = name;
+        this.status = status;
+        this.population = population;
+    }
+}
+
+// Класс для представления парка
+class Park {
+    String name;
+    String type;
+    double area;
+    boolean hasWaterBody;
+    String buildDate;
+
+    public Park(String name, String type, double area, boolean hasWaterBody, String buildDate) {
+        this.name = name;
+        this.type = type;
+        this.area = area;
+        this.hasWaterBody = hasWaterBody;
+        this.buildDate = buildDate;
+    }
+}
